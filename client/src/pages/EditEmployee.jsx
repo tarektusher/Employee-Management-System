@@ -116,7 +116,7 @@ const EditEmployee = () => {
                   <CardMedia
                     component="img"
                     height="250"
-                    image={require("../assets/angryboss-removebg-preview.png")}
+                    image={require("../assets/3ffa463173416a5eea503b949da5f56b.jpg")}
                     alt="green iguana"
                   />
                   <CardContent>
@@ -132,8 +132,8 @@ const EditEmployee = () => {
                 <CardActionArea sx={{ marginTop: "20px" }}>
                   <CardMedia
                     component="img"
-                    height="250"
-                    image={require("../assets/swftare.webp")}
+                    height="450"
+                    image={require("../assets/066ca5d9963a6aceb28b7b84d8257f31.jpg")}
                     alt="green iguana"
                   />
                   <CardContent>
@@ -400,8 +400,8 @@ const EditEmployee = () => {
                 <CardActionArea sx={{ marginTop: "20px" }}>
                   <CardMedia
                     component="img"
-                    height="250"
-                    image={require("../assets/emp1-removebg-preview.png")}
+                    height="300"
+                    image={require("../assets/images.jpg")}
                     alt="green iguana"
                   />
                   <CardContent>
@@ -417,8 +417,8 @@ const EditEmployee = () => {
                 <CardActionArea sx={{ marginTop: "20px" }}>
                   <CardMedia
                     component="img"
-                    height="250"
-                    image={require("../assets/us-business-software-and-services-market.png")}
+                    height="300"
+                    image={require("../assets/new.avif")}
                     alt="green iguana"
                   />
                   <CardContent>

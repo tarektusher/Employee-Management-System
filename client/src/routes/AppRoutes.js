@@ -9,6 +9,7 @@ import DashBoard from '../components/DashBoard';
 import AddEmployee from '../pages/AddEmployee';
 import DeleteEmployee from '../pages/DeleteEmployee';
 import EditEmployee from '../pages/EditEmployee';
+import FindOneEmployee from '../components/FindOneEmployee';
 export function AppRoutes() {
   const routes = createBrowserRouter([
     {
@@ -42,6 +43,10 @@ export function AppRoutes() {
         {
           path : 'editemployee',
           element : <EditEmployee/>,
+        },
+        {
+          path : 'findoneemployee',
+          element : <FindOneEmployee/>,
         },
       ],
     },

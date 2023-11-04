@@ -5,12 +5,14 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditNoteTwoToneIcon from '@mui/icons-material/EditNoteTwoTone';
 import AddIcon from '@mui/icons-material/Add';
 import { Navigate, useNavigate } from 'react-router-dom';
+import FindInPageOutlinedIcon from '@mui/icons-material/FindInPageOutlined';
 
 export default function EmployeeButton() {
   const navigate = useNavigate();
   return (
-    <Stack spacing={2} direction="row" sx={{marginLeft: "35%", marginTop : '10px'}}>
+    <Stack spacing={2} direction="row" sx={{marginLeft : '30vw', marginTop : '10px'}}>
       <Button variant="contained" startIcon={<AddIcon/>} onClick={()=>navigate('/addemployee')}>Add Employee</Button>
+      <Button variant="contained" startIcon={<FindInPageOutlinedIcon/>} onClick={()=>navigate('/findoneemployee')}>Get A Employee</Button>
       <Button variant="outlined" startIcon={<DeleteIcon />} onClick={()=>navigate('/deleteemployee')}>
         Delete
       </Button>

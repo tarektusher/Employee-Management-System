@@ -58,7 +58,7 @@ export default function DashBoard() {
   return (
     <div className="bgColor">
       <Box sx={{display : 'flex'}}>
-        <Typography variant = "h3" sx={{margin : 'auto', marginLeft : '30vw'}}>
+        <Typography variant = "h3" sx={{margin : '5px', marginLeft : '30vw'}}>
         <span className="Emp">Employee</span> Dashboard
         </Typography>
         <Button variant="contained" sx={{ margin: "auto" }} onClick={()=>navigate('/employee')}>Live Employee Look</Button>

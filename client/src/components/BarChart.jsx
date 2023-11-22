@@ -29,20 +29,30 @@ const Tableau10 = [
  
  let age = [0];
   export default function Barchart() {
+        const initialValue = [0];
         const [employeeData, setEmployeeData] = useState();
+        const [age, setAge] = useState(initialValue);
         const [color, setColor] = useState('#4e79a7');
-        const employeeResponse = useGetAllEmployees();
         
+        const employeeResponse = useGetAllEmployees();
         React.useEffect(()=>{
             setEmployeeData(employeeResponse.data?.data);
+            const addData = (value) =>{
+                //console.log(value)
+                setAge(prevAge => [...prevAge, value]);
+            }
             employeeData?.map((employee)=>{
-                return age.push(employee.age);
-            },[])
-            console.log(age);
-        })
-        if(employeeResponse?.isLoading){
-            return <CircularProgress/>
-        }
+                addData(employee.age)
+            })
+        },[])
+       
+            //setEmployeeData(employeeResponse.data?.data);
+            
+            //console.log(age);
+        
+        // if(employeeResponse?.isLoading){
+        //     return <CircularProgress/>
+        // }
         
 
         const handleChange = (event, nextColor) => {

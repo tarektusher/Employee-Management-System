@@ -10,6 +10,7 @@ import AddEmployee from '../pages/AddEmployee';
 import DeleteEmployee from '../pages/DeleteEmployee';
 import EditEmployee from '../pages/EditEmployee';
 import FindOneEmployee from '../components/FindOneEmployee';
+import { LoginForm } from '../components/LoginForm';
 export function AppRoutes() {
   const routes = createBrowserRouter([
     {
@@ -48,6 +49,10 @@ export function AppRoutes() {
           path : 'findoneemployee',
           element : <FindOneEmployee/>,
         },
+        {
+          path : 'login',
+          element : <LoginForm/>
+        }
       ],
     },
   ]);

@@ -34,7 +34,6 @@ export default function DashBoard() {
   const [totalUser, setTotalUser] = React.useState(0);
   const [totalEmployee, setTotalEmployee] = React.useState(0);
   const userResponse = useGetAllUsers();
- 
   const employeeResponse = useGetAllEmployees();
   const navigate = useNavigate();
 
@@ -53,13 +52,13 @@ export default function DashBoard() {
     fetchUserData();
   }, [totalUser]);
 
+  
   //? Set Total Number of Employee and Salary
   useEffect(() => {
     const fetchEmployeeData = async () => {
       try {
         if(employeeResponse && employeeResponse.data){
           const employees = employeeResponse?.data.data;
-          console.log(employees)
           setEmployeeData(employees);
           const totalEmployeeCount = employees?.length;
           setTotalEmployee(totalEmployeeCount);
@@ -67,7 +66,7 @@ export default function DashBoard() {
           setSalary(totalSalary);
         }
       } catch (error) {
-        console.error("Error fetching employee data:", error);
+        throw error;
       }
     };
     fetchEmployeeData();

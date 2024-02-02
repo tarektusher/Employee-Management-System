@@ -2,7 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import Axios from '../axios';
-import { CircularProgress, Typography } from '@mui/material';
+import { Button, CircularProgress, Typography } from '@mui/material';
 import EmployeeButton from './EmployeeButton';
 import { useGetAllEmployees } from '../hooks/useEmployee';
 
@@ -21,30 +21,81 @@ const columns = [
     width: 150,
     editable: true,
   },
-  {
-    field: 'age',
-    headerName: 'Age',
-    width: 80,
-    editable: true,
-  },
-  {
-    field: 'department',
-    headerName: 'Department',
-    width: 250,
-    editable: true,
-  },
+  // {
+  //   field: 'age',
+  //   headerName: 'Age',
+  //   width: 80,
+  //   editable: true,
+  // },
+  // {
+  //   field: 'department',
+  //   headerName: 'Department',
+  //   width: 250,
+  //   editable: true,
+  // },
   {
     field: 'position',
     headerName: 'Position',
     width: 250,
     editable: true,
   },
+  // {
+  //   field: 'salary',
+  //   headerName: 'Salary',
+  //   width: 100,
+  //   editable: true,
+  // },
   {
-    field: 'salary',
-    headerName: 'Salary',
+    field : 'viewButton',
+    headerName : 'View',
     width: 100,
-    editable: true,
+    renderCell : (cellValues) =>{
+      return  (
+        <div>
+          <Button 
+            variant='contained'
+            color = 'primary'
+            onClick={(event) =>{
+              
+            }}
+          >  View</Button>
+        </div>
+      )
+    }
   },
+    {
+      field : 'Edit',
+      width: 100,
+      renderCell : (cellValues) =>{
+        return  (
+          <div>
+            <Button 
+              style={{
+                background : "#38a3a5"
+              }}
+              variant='contained'
+            >Edit</Button>
+          </div>
+        )
+      }
+    },
+      {
+        field : 'Delete',
+        
+        renderCell : (cellValues) =>{
+          return  (
+            <div>
+              <Button
+              style={{
+                background : "#d00000"
+              }}
+                variant='contained'
+ 
+              >Delete</Button>
+            </div>
+          )
+        },
+  }
 ];
 
 
@@ -66,10 +117,10 @@ export default function UserTable() {
                 'id' : user.emp_id,
                 'firstname' : user.firstname,
                 'lastname' : user.lastname,
-                'age' : user.age,
-                'department' : user.department,
+                //'age' : user.age,
+                //'department' : user.department,
                 'position' : user.position,
-                'salary' : user.salary,
+                //'salary' : user.salary,
             }
             rows.push(tempData);
         })
@@ -82,7 +133,7 @@ export default function UserTable() {
       </Typography>
       <EmployeeButton/>
       <Box sx = {{width : '100%', marginTop: '20px',display: 'flex', justifyContent: 'center', alignItems : 'center' }}>
-          <Box sx={{ height: 'fit-content', width: '80%'}}>
+          <Box sx={{ height: 'fit-content', width: '75%'}}>
           <DataGrid
               rows={rows}
               columns={columns}

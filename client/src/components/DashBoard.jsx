@@ -33,29 +33,31 @@ let totalUser = 0;
 export default function DashBoard() {
   const [userData, setUserData] = React.useState();
   const [employeeData, setEmployeeData] = React.useState();
+  const [salary, setSalary] = React.useState(0);
+  const [totalUser, setTotalUser] = React.useState(0);
   const isFatchData = useRef(false);
   const userResponse = useGetAllUsers();
   const employeeResponse = useGetAllEmployees();
   const navigate = useNavigate();
   
-  useEffect(()=>{
-    console.log("Tarek")
-    if(isFatchData.current)return;
-    setUserData(userResponse.data?.data);
-    setEmployeeData(employeeResponse.data?.data);
-    
-    employeeData?.map((employee)=>{
-      Salary+=employee.salary;
-      totalEmployee = employeeData?.length;
-      totalUser = userData?.length;
-      isFatchData.current = true;
-    })
-    
-    console.log(userResponse.data?.data)
-    console.log(employeeResponse.data?.data)
-    console.log(Salary);
-    
-  },[])
+  //? Set Total Number of Users
+  useEffect(() =>{
+    const fetchUserData = async () =>{
+      try {
+        setUserData(userResponse?.data.data);
+        setTotalUser(userData.length);
+        console.log(totalUser)
+      }catch(error){
+        throw error;
+      }
+    }
+    fetchUserData();
+  },[totalUser])
+
+
+  //? Set Total Number of Employee and Salary
+  
+
   if(userResponse?.isLoading || employeeResponse?.isLoading){
     return <CircularProgress/>
   }

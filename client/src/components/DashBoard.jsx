@@ -14,10 +14,10 @@ import {
 } from "@mui/material";
 import "../../src/Dash.css";
 import AccordianDash from "./AccordianDash";
-import { useGetAllUsers } from "../hooks/useUser";
+import {useGetAllUsers} from "../hooks/useUser";
 import { useGetAllEmployees } from "../hooks/useEmployee";
 import Barchart from "./BarChart";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -27,51 +27,69 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   color: theme.palette.text.secondary,
 }));
-let Salary = 0;
-let totalEmployee = 0;
-let totalUser = 0;
+
 export default function DashBoard() {
-  const [userData, setUserData] = React.useState();
-  const [employeeData, setEmployeeData] = React.useState();
+  const [employeeData, setEmployeeData] = React.useState(null);
   const [salary, setSalary] = React.useState(0);
   const [totalUser, setTotalUser] = React.useState(0);
-  const isFatchData = useRef(false);
+  const [totalEmployee, setTotalEmployee] = React.useState(0);
   const userResponse = useGetAllUsers();
+ 
   const employeeResponse = useGetAllEmployees();
   const navigate = useNavigate();
-  
+
   //? Set Total Number of Users
-  useEffect(() =>{
-    const fetchUserData = async () =>{
+  useEffect(() => {
+    const fetchUserData = async () => {
       try {
-        setUserData(userResponse?.data.data);
-        setTotalUser(userData.length);
-        console.log(totalUser)
-      }catch(error){
+        if(userResponse && userResponse.data){
+          const user = userResponse?.data.data;
+          setTotalUser(user?.length);
+        }
+      } catch (error) {
         throw error;
       }
-    }
+    };
     fetchUserData();
-  },[totalUser])
-
+  }, [totalUser]);
 
   //? Set Total Number of Employee and Salary
+  useEffect(() => {
+    const fetchEmployeeData = async () => {
+      try {
+        if(employeeResponse && employeeResponse.data){
+          const employees = employeeResponse?.data.data;
+          console.log(employees)
+          setEmployeeData(employees);
+          const totalEmployeeCount = employees?.length;
+          setTotalEmployee(totalEmployeeCount);
+          const totalSalary = employees?.reduce((total, employee) => total + employee.salary, 0);
+          setSalary(totalSalary);
+        }
+      } catch (error) {
+        console.error("Error fetching employee data:", error);
+      }
+    };
+    fetchEmployeeData();
+  }, [totalEmployee, salary]);
   
 
-  if(userResponse?.isLoading || employeeResponse?.isLoading){
-    return <CircularProgress/>
-  }
-  
   return (
     <div className="bgColor">
-      <Box sx={{display : 'flex'}}>
-        <Typography variant = "h3" sx={{margin : '5px', marginLeft : '30vw'}}>
-        <span className="Emp">Employee</span> Dashboard
+      <Box sx={{ display: "flex" }}>
+        <Typography variant="h3" sx={{ margin: "5px", marginLeft: "30vw" }}>
+          <span className="Emp">Employee</span> Dashboard
         </Typography>
-        <Button variant="contained" sx={{ margin: "auto" }} onClick={()=>navigate('/employee')}>Live Employee Look</Button>
+        <Button
+          variant="contained"
+          sx={{ margin: "auto" }}
+          onClick={() => navigate("/employee")}
+        >
+          Live Employee Look
+        </Button>
       </Box>
-      
-      <Box sx={{ flexGrow: 1, marginLeft: "6vh",  marginRight: "6vh" }}>
+
+      <Box sx={{ flexGrow: 1, marginLeft: "6vh", marginRight: "6vh" }}>
         <Grid container spacing={2}>
           <Grid item xs={8}>
             <Stack direction="row" spacing={2}>
@@ -123,7 +141,7 @@ export default function DashBoard() {
                 {/* <div className="iconStyle"><CurrencyExchangeIcon/></div> */}
                 <Stack direction={"col"}>
                   <div className="paddingall">
-                    <span className="priceTitle">{Salary}Tk</span>
+                    <span className="priceTitle">{salary}Tk</span>
                     <br />
                     <span className="priceSubTitle">Total Salary</span>
                   </div>
@@ -136,7 +154,9 @@ export default function DashBoard() {
                 <div className="iconStyle">{/* <CurrencyExchangeIcon/> */}</div>
                 <Stack direction={"col"}>
                   <div className="paddingall">
-                    <span className="priceTitle">{Salary/totalEmployee} Tk</span>
+                    <span className="priceTitle">
+                      {salary / totalEmployee} Tk
+                    </span>
                     <br />
                     <span className="priceSubTitle">Average Salary</span>
                   </div>
@@ -151,7 +171,7 @@ export default function DashBoard() {
             <Card sx={{ height: 65 + "vh" }}>
               <CardActionArea>
                 <CardContent>
-                    <Barchart/>
+                  <Barchart />
                 </CardContent>
               </CardActionArea>
             </Card>

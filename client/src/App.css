@@ -46,3 +46,10 @@
   align-items: center;
   margin-bottom: 20px;
 }
+.employeeTableHeader {
+  background-color: rgb(180, 175, 175);
+  font-weight: bolder !important;
+  text-align: center !important;
+  display: flex;
+  justify-items: center;
+}

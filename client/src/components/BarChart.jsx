@@ -1,9 +1,6 @@
-
-import Axios from "../axios";
 import React, {useState, useEffect} from 'react';
-import { BarChart } from '@mui/x-charts/BarChart';
 import { CircularProgress, Typography } from "@mui/material";
-import { useGetAllEmployees } from "../hooks/useEmployee";
+import useEmployee  from "../hooks/useEmployee";
 import { LineChart } from '@mui/x-charts/LineChart';
 import Stack from '@mui/material/Stack';
 import ToggleButton from '@mui/material/ToggleButton';
@@ -34,7 +31,7 @@ const Tableau10 = [
         const [age, setAge] = useState(initialValue);
         const [color, setColor] = useState('#4e79a7');
         
-        const employeeResponse = useGetAllEmployees();
+        const employeeResponse = useEmployee.useGetAllEmployees();
         React.useEffect(()=>{
             setEmployeeData(employeeResponse.data?.data);
             const addData = (value) =>{

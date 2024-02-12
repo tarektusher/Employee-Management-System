@@ -15,7 +15,7 @@ import {
 import "../../src/Dash.css";
 import AccordianDash from "./AccordianDash";
 import {useGetAllUsers} from "../hooks/useUser";
-import { useGetAllEmployees } from "../hooks/useEmployee";
+import useEmployee from "../hooks/useEmployee";
 import Barchart from "./BarChart";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
@@ -34,7 +34,7 @@ export default function DashBoard() {
   const [totalUser, setTotalUser] = React.useState(0);
   const [totalEmployee, setTotalEmployee] = React.useState(0);
   const userResponse = useGetAllUsers();
-  const employeeResponse = useGetAllEmployees();
+  const employeeResponse = useEmployee.useGetAllEmployees();
   const navigate = useNavigate();
 
   //? Set Total Number of Users

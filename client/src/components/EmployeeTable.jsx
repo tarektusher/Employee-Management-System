@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import { Button, CircularProgress, Typography } from "@mui/material";
 import EmployeeButton from "./EmployeeButton";
-import { useGetAllEmployees } from "../hooks/useEmployee";
+import useEmployee from "../hooks/useEmployee";
 import { Link } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -189,7 +189,7 @@ const columns = [
 
 const EmployeeTable = () => {
   const [userData, setUserData] = React.useState();
-  const { data, isError, isLoading, error } = useGetAllEmployees();
+  const { data, isError, isLoading, error } = useEmployee.useGetAllEmployees();
 
   React.useEffect(() => {
     setUserData(data?.data);

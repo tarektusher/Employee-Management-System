@@ -1,6 +1,5 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import { DataGrid } from "@mui/x-data-grid";
 import { Button, CircularProgress, Typography } from "@mui/material";
 import EmployeeButton from "./EmployeeButton";
 import { useGetAllEmployees } from "../hooks/useEmployee";
@@ -158,7 +157,7 @@ const columns = [
             component={Link}
             to={`/view/${id}`}
             variant="contained"
-            style={{ backgroundColor: "green", marginRight: "10px"}}
+            style={{ backgroundColor: "green", marginRight: "10px" }}
           >
             <VisibilityIcon />
             <Typography>View</Typography>
@@ -188,7 +187,7 @@ const columns = [
   },
 ];
 
-const employeeTable = () => {
+const EmployeeTable = () => {
   const [userData, setUserData] = React.useState();
   const { data, isError, isLoading, error } = useGetAllEmployees();
 
@@ -226,7 +225,11 @@ const employeeTable = () => {
         <EmployeeButton />
       </Box>
       <div className="mt-[2.5%] w-full h-full ">
-        <table {...getTableProps()} style={{ border: "1px solid black" }} className="w-[85%] align-middle text-center ml-[8%]">
+        <table
+          {...getTableProps()}
+          style={{ border: "1px solid black" }}
+          className="w-[85%] align-middle text-center ml-[8%]"
+        >
           <thead>
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>
@@ -273,4 +276,4 @@ const employeeTable = () => {
   );
 };
 
-export default employeeTable;
+export default EmployeeTable;

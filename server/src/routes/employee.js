@@ -115,12 +115,9 @@ employeeRoutes.get('/employee/:id', async(req, res) =>{
     try {
         
             emp_id = req.params.id;
-            email = req.params.email;
-        
         const employee_id = await Employee.findOne({emp_id});
-        const employee_email = await Employee.findOne({email});
-
-        if(employee_id && employee_email){
+        console.log(employee_id);
+        if(employee_id){
             res.status(200).json(employee_id);
         }
         else{

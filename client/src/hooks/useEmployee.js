@@ -10,12 +10,11 @@ const useGetAllEmployees=()=>{
     )
 }
 const useGetEmployeeInfo = ({id}) =>{
-    return useQuery('useGetEmployeeInfo',()=>{
-        Axios({
-            method : 'GET',
-            url : `employee-view/${id}`
-        })
-    })
+    console.log(id)
+     return useQuery('useGetEmployeeInfo', async () => {
+        const response = await Axios.get(`/employee/${id}`);
+        return response.data;
+    });
 }
 const useGetEmployeeEdit = ({id})=>{
     return useQuery('useGetEmployeeEdit',()=>{

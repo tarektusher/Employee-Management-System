@@ -188,7 +188,7 @@ const columns = [
   },
 ];
 
-const ReactTableExample = () => {
+const employeeTable = () => {
   const [userData, setUserData] = React.useState();
   const { data, isError, isLoading, error } = useGetAllEmployees();
 
@@ -273,4 +273,4 @@ const ReactTableExample = () => {
   );
 };
 
-export default ReactTableExample;
+export default employeeTable;

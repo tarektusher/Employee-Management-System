@@ -7,6 +7,7 @@ import { useGetAllUsers } from "../hooks/useUser";
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import { useTable } from "react-table";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -42,8 +43,6 @@ const UserTable = () => {
         return <CircularProgress/>
     }
     
-    // if(userData)
-    // console.log(userData);
     let rows = [];
     if (userData) {
         const data = userData.map((user) => {

@@ -16,7 +16,7 @@ const ViewEmployee = () => {
     }
   }, [response]);
   return (
-    <div className="bg-slate-200 h-screen overflow-y-hidden">
+    <div className="bg-slate-200 min-h-full overflow-y-hidden">
       <div className="mt-[0.5%] overflow-y-hidden">
         <p className="text-4xl  mx-auto w-[25%] bg-slate-300  flex items-center justify-center rounded-md px-[1%] py-[0.5%] pt-[.5%]">
           Employee Details
@@ -132,6 +132,37 @@ const ViewEmployee = () => {
                 <p className="text-gray-400 text-xl">University Name</p>
                 <p className="text-black text-xl font-semibold">
                   {user.education.universityname}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="mb-[1%]">
+            <p className="text-4xl  mx-auto w-[30%] bg-slate-300  flex items-center justify-center rounded-md px-[1%] py-[0.5%] mt-[.5%]">
+              Employment Information
+            </p>
+            <div className="w-[95%] mt-[.5%] bg-white flex flex-col md:flex-row justify-evenly align-middle text-left ml-[2%] rounded-md p-[1%]">
+              <div>
+                <p className="text-gray-400 text-xl">Position</p>
+                <p className="text-black text-xl font-semibold">
+                  {user.position}
+                </p>
+              </div>
+              <div>
+                <p className="text-gray-400 text-xl">Department</p>
+                <p className="text-black text-xl font-semibold">
+                  {user.department}
+                </p>
+              </div>
+              <div>
+                <p className="text-gray-400 text-xl">Joining Data</p>
+                <p className="text-black text-xl font-semibold">
+                  {user.joiningdate}
+                </p>
+              </div>
+              <div>
+                <p className="text-gray-400 text-xl">Salary</p>
+                <p className="text-black text-xl font-semibold">
+                  {user.salary}
                 </p>
               </div>
             </div>

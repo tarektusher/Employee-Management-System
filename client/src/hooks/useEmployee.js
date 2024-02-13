@@ -10,7 +10,6 @@ const useGetAllEmployees=()=>{
     )
 }
 const useGetEmployeeInfo = ({id}) =>{
-    console.log(id)
      return useQuery('useGetEmployeeInfo', async () => {
         const response = await Axios.get(`/employee/${id}`);
         return response.data;

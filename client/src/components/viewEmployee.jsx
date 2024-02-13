@@ -92,15 +92,16 @@ const ViewEmployee = () => {
               </div>
 
               <div className="flex flex-col justify-evenly md:w-1/2">
+                
+                <div>
+                  <p className="text-gray-400 text-xl">Country</p>
+                  <p className="text-black text-xl font-semibold">Bangladesh</p>
+                </div>
                 <div>
                   <p className="text-gray-400 text-xl">Address</p>
                   <p className="text-black text-xl font-semibold">
                     {user.address}
                   </p>
-                </div>
-                <div>
-                  <p className="text-gray-400 text-xl">Country</p>
-                  <p className="text-black text-xl font-semibold">Bangladesh</p>
                 </div>
               </div>
             </div>

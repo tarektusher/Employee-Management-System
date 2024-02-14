@@ -1,11 +1,7 @@
-// import React from 'react';
 import {
   Button,
   Card,
-  CardActionArea,
-  CardActions,
   CardContent,
-  CardMedia,
   TextField,
   Typography,
 } from "@mui/material";
@@ -20,6 +16,8 @@ import Grid from "@mui/material/Grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import employeeeServices from "../services/employeeServices";
 import "../../src/Dash.css";
+import useEmployee from "../hooks/useEmployee";
+import { useParams } from "react-router-dom";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -30,28 +28,34 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const AddEmployee = () => {
+  const { id } = useParams();
+  const [user, setUser] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+  const response = useEmployee.useGetEmployeeInfo({ id });
   const form = useForm({
     defaultValues: {
-      firstname: "",
-      lastname: "",
-      emp_id: "",
-      age: 0,
-      email: "",
-      phonenumber: "",
-      address: "",
-      department: "",
-      position: "",
-      salary: 0,
-      joiningdate: "",
+      firstname: user?.firstname || "",
+      lastname: user?.lastname || "",
+      emp_id: user?.emp_id || "",
+      age: user?.age || "",
+      email: user?.email || "",
+      phonenumber: user?.phonenumber || "",
+      address: user?.address || "",
+      department: user?.department || "",
+      position: user?.position || "",
+      salary: user?.salary || "",
+      joiningdate: user?.joiningdate || "",
       education: {
-        degree: "",
-        subject: "",
-        universityname: "",
-        gradutionyear: "",
+        degree: user?.education?.degree || "",
+        subject: user?.education?.subject || "",
+        universityname: user?.education?.universityname || "",
+        graduationyear: user?.education?.graduationyear || "",
       },
-      skills: [""],
+      skills: user?.skills || [],
     },
   });
+  
+  console.log(form)
   const { register, control, handleSubmit, formState, getValues, reset } = form;
   const { isSubmitSuccessful } = formState;
   React.useEffect(() => {
@@ -61,7 +65,6 @@ const AddEmployee = () => {
   }, [isSubmitSuccessful]);
   const onSubmit = async (data) => {
     
-    // data.preventDefault();
     const {
       firstname,
       lastname,
@@ -77,7 +80,6 @@ const AddEmployee = () => {
       education,
       skills,
     } = data;
-    //console.log(address, skills);
     await employeeeServices.registerEmployee({
       firstname,
       lastname,
@@ -110,48 +112,11 @@ const AddEmployee = () => {
           Employee Information
         </Typography>
         <Grid container spacing={4}>
-          {/* <Grid item xs>
-            <Item>
-              <Card sx={{ maxWidth: 460 }}>
-                <CardActionArea sx={{ marginTop: "20px" }}>
-                  <CardMedia
-                    component="img"
-                    height="250"
-                    image={require("../assets/angryboss-removebg-preview.png")}
-                    alt="green iguana"
-                  />
-                  <CardContent>
-                    <Typography variant="h5" color="text.secondary">
-                      Don't blame the boss. He has enough problems.
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </Item>
-            <Item sx={{marginTop : '10px'}}>
-              <Card sx={{ maxWidth: 460 }}>
-                <CardActionArea sx={{ marginTop: "20px" }}>
-                  <CardMedia
-                    component="img"
-                    height="250"
-                    image={require("../assets/swftare.webp")}
-                    alt="green iguana"
-                  />
-                  <CardContent>
-                    <Typography variant="h5" color="text.secondary">
-                      Don't blame the boss. He has enough problems.
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </Item>
-          </Grid> */}
           <Grid item xs={12}>
             <Item>
               <Typography gutterBottom variant="h5" align="center">
                 Basic Information
               </Typography>
-              {/* <Grid> */}
               <Card
                 style={{ width : '100%', padding: "20px 5px", margin: "0 auto" }}
               >
@@ -170,6 +135,7 @@ const AddEmployee = () => {
                       <Grid xs={12} sm={6} item>
                         <TextField
                           placeholder="Enter First name"
+                          defaultValue={form.defaultValues?.firstname}
                           label="First Name"
                           variant="outlined"
                           {...register("firstname")}
@@ -395,45 +361,8 @@ const AddEmployee = () => {
                   <DevTool control={control} />
                 </CardContent>
               </Card>
-              {/* </Grid> */}
             </Item>
           </Grid>
-          {/* <Grid item xs>
-            <Item>
-            <Card sx={{ maxWidth: 460 }}>
-                <CardActionArea sx={{ marginTop: "20px" }}>
-                  <CardMedia
-                    component="img"
-                    height="250"
-                    image={require("../assets/emp1-removebg-preview.png")}
-                    alt="green iguana"
-                  />
-                  <CardContent>
-                    <Typography variant="h5" color="text.secondary">
-                    I’m not a great programmer; I’m just a good programmer with great habits.
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </Item>
-            <Item sx={{marginTop : '10px'}}>
-            <Card sx={{ maxWidth: 430 }}>
-                <CardActionArea sx={{ marginTop: "20px" }}>
-                  <CardMedia
-                    component="img"
-                    height="250"
-                    image={require("../assets/us-business-software-and-services-market.png")}
-                    alt="green iguana"
-                  />
-                  <CardContent>
-                    <Typography variant="h5" color="text.secondary">
-                    I’m not a great programmer; I’m just a good programmer with great habits.
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </Item>
-          </Grid> */}
         </Grid>
       </Box>
     </div>

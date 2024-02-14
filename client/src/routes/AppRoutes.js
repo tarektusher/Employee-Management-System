@@ -1,7 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import { HomePage } from "../pages/HomePage";
-// import { CoursesPage } from '../pages/CoursesPage';
 import { AboutPage } from "../pages/AboutPage";
 import UserTable from "../components/UserTable";
 import EmployeeTable from "../components/EmployeeTable";
@@ -43,7 +42,7 @@ export function AppRoutes() {
           element: <DeleteEmployee />,
         },
         {
-          path: "editemployee",
+          path: "editemployee/:id",
           element: <EditEmployee />,
         },
         {

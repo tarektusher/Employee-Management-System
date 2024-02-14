@@ -165,7 +165,7 @@ const columns = [
           </Button>
           <Button
             component={Link}
-            to={`/edit/${id}`}
+            to={`/editemployee/${id}`}
             variant="contained"
             style={{ backgroundColor: "blue", marginRight: "10px" }}
           >

@@ -60,8 +60,7 @@ const AddEmployee = () => {
     });
   }, [isSubmitSuccessful]);
   const onSubmit = async (data) => {
-    console.log("::: Form Submitted :::", data);
-    alert("::: Form was Submitted Successfully :::");
+    
     // data.preventDefault();
     const {
       firstname,
@@ -94,6 +93,8 @@ const AddEmployee = () => {
       education,
       skills,
     });
+    alert("::: Form was Submitted Successfully :::");
+
   };
   const { fields, append, remove } = useFieldArray({
     name: "skills",
@@ -230,7 +231,7 @@ const AddEmployee = () => {
                           required
                         />
                       </Grid>
-                      <Grid item xs={12}>
+                      <Grid item xs={12} >
                         <TextField
                           label="address"
                           type="text"
@@ -242,7 +243,6 @@ const AddEmployee = () => {
                         />
                       </Grid>
                       <p className="text-4xl text-left pt-[1%] pb-[1%]">Employment Information</p>
-
                       <Grid item xs={12}>
                         <TextField
                           label="Department"
@@ -253,7 +253,7 @@ const AddEmployee = () => {
                           required
                         />
                       </Grid>
-                      <Grid item xs={12}>
+                      <Grid item xs={12} sm={6}>
                         <TextField
                           label="Position"
                           placeholder="Position"
@@ -263,7 +263,7 @@ const AddEmployee = () => {
                           required
                         />
                       </Grid>
-                      <Grid item xs={12}>
+                      <Grid item xs={12} sm={6}>
                         <TextField
                           label="Salary"
                           {...register("salary", {
@@ -275,7 +275,7 @@ const AddEmployee = () => {
                           required
                         />
                       </Grid>
-                      <Grid item xs={12}>
+                      <Grid item xs={12} >
                         <TextField
                           label="joining date"
                           variant="outlined"
@@ -298,7 +298,7 @@ const AddEmployee = () => {
                           required
                         />
                       </Grid>
-                      <Grid xs={12} sm={12} item>
+                      <Grid xs={12} sm={6} item>
                         <TextField
                           placeholder="Subject Name"
                           {...register("education.subject")}
@@ -309,7 +309,7 @@ const AddEmployee = () => {
                           required
                         />
                       </Grid>
-                      <Grid xs={12} sm={12} item>
+                      <Grid xs={12} sm={6} item>
                         <TextField
                           placeholder="University Name"
                           {...register("education.universityname")}

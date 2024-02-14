@@ -1,8 +1,9 @@
-
+// import React from 'react';
 import {
   Button,
   Card,
   CardActionArea,
+  CardActions,
   CardContent,
   CardMedia,
   TextField,
@@ -28,7 +29,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const EditEmployee = () => {
+const AddEmployee = () => {
   const form = useForm({
     defaultValues: {
       firstname: "",
@@ -59,8 +60,7 @@ const EditEmployee = () => {
     });
   }, [isSubmitSuccessful]);
   const onSubmit = async (data) => {
-    console.log("::: Form Submitted :::", data);
-    alert("::: Form was Submitted Successfully :::");
+    
     // data.preventDefault();
     const {
       firstname,
@@ -78,7 +78,7 @@ const EditEmployee = () => {
       skills,
     } = data;
     //console.log(address, skills);
-    await employeeeServices.editEmployee({
+    await employeeeServices.registerEmployee({
       firstname,
       lastname,
       emp_id,
@@ -93,6 +93,8 @@ const EditEmployee = () => {
       education,
       skills,
     });
+    alert("::: Form was Submitted Successfully :::");
+
   };
   const { fields, append, remove } = useFieldArray({
     name: "skills",
@@ -105,17 +107,17 @@ const EditEmployee = () => {
     <div className="bgColor">
       <Box sx={{ flexGrow: 1 }}>
         <Typography gutterBottom variant="h3" align="center">
-          Edit Employee Information
+          Employee Information
         </Typography>
         <Grid container spacing={4}>
-          <Grid item xs>
+          {/* <Grid item xs>
             <Item>
               <Card sx={{ maxWidth: 460 }}>
                 <CardActionArea sx={{ marginTop: "20px" }}>
                   <CardMedia
                     component="img"
                     height="250"
-                    image={require("../assets/3ffa463173416a5eea503b949da5f56b.jpg")}
+                    image={require("../assets/angryboss-removebg-preview.png")}
                     alt="green iguana"
                   />
                   <CardContent>
@@ -131,8 +133,8 @@ const EditEmployee = () => {
                 <CardActionArea sx={{ marginTop: "20px" }}>
                   <CardMedia
                     component="img"
-                    height="450"
-                    image={require("../assets/066ca5d9963a6aceb28b7b84d8257f31.jpg")}
+                    height="250"
+                    image={require("../assets/swftare.webp")}
                     alt="green iguana"
                   />
                   <CardContent>
@@ -143,15 +145,15 @@ const EditEmployee = () => {
                 </CardActionArea>
               </Card>
             </Item>
-          </Grid>
-          <Grid item xs={4}>
+          </Grid> */}
+          <Grid item xs={12}>
             <Item>
               <Typography gutterBottom variant="h5" align="center">
                 Basic Information
               </Typography>
               {/* <Grid> */}
               <Card
-                style={{ maxWidth: 450, padding: "20px 5px", margin: "0 auto" }}
+                style={{ width : '100%', padding: "20px 5px", margin: "0 auto" }}
               >
                 <CardContent>
                   <Typography
@@ -162,6 +164,7 @@ const EditEmployee = () => {
                   >
                     Fill up the form and read carefully before submit.
                   </Typography>
+                  <p className="text-4xl text-left pt-[1%] pb-[1%]">Personal Information</p>
                   <form onSubmit={handleSubmit(onSubmit)} noValidate>
                     <Grid container spacing={1}>
                       <Grid xs={12} sm={6} item>
@@ -206,7 +209,7 @@ const EditEmployee = () => {
                           required
                         />
                       </Grid>
-                      <Grid item xs={12}>
+                      <Grid item xs={12} sm={6}>
                         <TextField
                           label="email"
                           type="email"
@@ -217,7 +220,7 @@ const EditEmployee = () => {
                           required
                         />
                       </Grid>
-                      <Grid item xs={12}>
+                      <Grid item xs={12} sm={6}>
                         <TextField
                           label="phonenumber"
                           type="number"
@@ -228,7 +231,7 @@ const EditEmployee = () => {
                           required
                         />
                       </Grid>
-                      <Grid item xs={12}>
+                      <Grid item xs={12} >
                         <TextField
                           label="address"
                           type="text"
@@ -239,6 +242,7 @@ const EditEmployee = () => {
                           required
                         />
                       </Grid>
+                      <p className="text-4xl text-left pt-[1%] pb-[1%]">Employment Information</p>
                       <Grid item xs={12}>
                         <TextField
                           label="Department"
@@ -249,7 +253,7 @@ const EditEmployee = () => {
                           required
                         />
                       </Grid>
-                      <Grid item xs={12}>
+                      <Grid item xs={12} sm={6}>
                         <TextField
                           label="Position"
                           placeholder="Position"
@@ -259,7 +263,7 @@ const EditEmployee = () => {
                           required
                         />
                       </Grid>
-                      <Grid item xs={12}>
+                      <Grid item xs={12} sm={6}>
                         <TextField
                           label="Salary"
                           {...register("salary", {
@@ -271,7 +275,7 @@ const EditEmployee = () => {
                           required
                         />
                       </Grid>
-                      <Grid item xs={12}>
+                      <Grid item xs={12} >
                         <TextField
                           label="joining date"
                           variant="outlined"
@@ -281,6 +285,7 @@ const EditEmployee = () => {
                           required
                         />
                       </Grid>
+                  <p className="text-4xl text-left pt-[1%] pb-[1%]">Educational Information</p>
 
                       <Grid xs={12} sm={12} item>
                         <TextField
@@ -293,7 +298,7 @@ const EditEmployee = () => {
                           required
                         />
                       </Grid>
-                      <Grid xs={12} sm={12} item>
+                      <Grid xs={12} sm={6} item>
                         <TextField
                           placeholder="Subject Name"
                           {...register("education.subject")}
@@ -304,7 +309,7 @@ const EditEmployee = () => {
                           required
                         />
                       </Grid>
-                      <Grid xs={12} sm={12} item>
+                      <Grid xs={12} sm={6} item>
                         <TextField
                           placeholder="University Name"
                           {...register("education.universityname")}
@@ -393,14 +398,14 @@ const EditEmployee = () => {
               {/* </Grid> */}
             </Item>
           </Grid>
-          <Grid item xs>
+          {/* <Grid item xs>
             <Item>
             <Card sx={{ maxWidth: 460 }}>
                 <CardActionArea sx={{ marginTop: "20px" }}>
                   <CardMedia
                     component="img"
-                    height="300"
-                    image={require("../assets/images.jpg")}
+                    height="250"
+                    image={require("../assets/emp1-removebg-preview.png")}
                     alt="green iguana"
                   />
                   <CardContent>
@@ -416,8 +421,8 @@ const EditEmployee = () => {
                 <CardActionArea sx={{ marginTop: "20px" }}>
                   <CardMedia
                     component="img"
-                    height="300"
-                    image={require("../assets/new.avif")}
+                    height="250"
+                    image={require("../assets/us-business-software-and-services-market.png")}
                     alt="green iguana"
                   />
                   <CardContent>
@@ -428,165 +433,10 @@ const EditEmployee = () => {
                 </CardActionArea>
               </Card>
             </Item>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Box>
     </div>
   );
 };
-export default EditEmployee;
-
-// const AddEmployee = () =>{
-
-//   // const form = useForm();
-// const form = useForm({
-//   defaultValues:{
-//     username : "Tarek",
-//     email : "",
-//     channel : "",
-//     social : {
-//       facebook : "www.facebook.com/@@@@@",
-//       instagram : "instagram"
-//     },
-//     phonenumbers : ["", ""],
-//     phoneArray : [{ number : ''}],
-//     age : 0,
-//     dob : new Date(),
-
-//   }
-// });
-//   const {register, control, handleSubmit,formState, watch, getValues, reset} = form;
-//   const {errors} = formState;
-// const onSubmit=(data)=>{
-//   console.log("::: Form Submitted :::", data);
-// }
-// const {fields, append, remove} = useFieldArray({
-//   name : 'phoneArray',
-//   control
-// })
-// const handleGetValues = () =>{
-//   console.log("get Values", getValues());
-// }
-// // const watchUserName = watch("username");
-// const watchUserName = watch(["username", "email"]);
-//   return (
-//     <div>
-//       <h2>Watch Username : {watchUserName}</h2>
-//       <form onSubmit={handleSubmit(onSubmit)} noValidate>
-//         <div className='formControl'>
-//           <label htmlFor='username'>User Name</label>
-//           <input type='text' id='username' {...register('username',{
-//             required : {
-//               value : true,
-//               message : "username is required",
-//             },
-
-//           })} ></input>
-//           <p className='error'>{errors.username?.message}</p>
-
-//         </div>
-//         <br /><br />
-//         <div className='formControl'>
-//           <label htmlFor='email'>Email</label>
-//           <input type='email' id='email' {...register('email',{
-//             pattern : {
-//               value :
-//               /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-//               message : "Invalid Email Format",
-//             },
-//             validate : {
-//               notAdmin: (fieldValue) =>{
-//                 return (
-//                   fieldValue !== "admin@example.com" || "Enter a different email value"
-//                 )
-//               }
-//             },
-
-//           })} />
-//           <p className='error'>{errors.email?.message}</p>
-//         </div>
-//         <br /><br />
-//         <div className='formControl'>
-//           <label htmlFor='channel'>Channel</label>
-//           <input type='text' id='channel' {...register('channel',{
-//             required : {
-//                 value : true,
-//                 message : "channel Name is required",
-//             }
-//           })}/>
-//           <p className='error'>{errors.channel?.message}</p>
-//         </div>
-//         <br /><br />
-//         <div className='formControl'>
-//           <label htmlFor='facebook'>Facebook</label>
-//           <input type='text' id='facebook' {...register('social.facebook')}/>
-//         </div>
-//         <br /><br />
-//         <div className='formControl'>
-//           <label htmlFor='instagram'>Instagram</label>
-//           <input type='text' id='instagram' {...register('social.instagram')}/>
-//         </div>
-//         <br /><br />
-//         <div className='formControl'>
-//           <label htmlFor='primary-phone'>Primary Phone Number</label>
-//           <input type='text' id='primary-phone' {...register('phonenumbers[0]')}/>
-//         </div>
-//         <br /><br />
-//         <div className='formControl'>
-//           <label htmlFor='secondary-phone'>Secondary Phone Number</label>
-//           <input type='text' id='secondary-phone' {...register('phonenumbers[1]')}/>
-//         </div>
-//         <br /><br />
-//         <div>
-//           <label htmlFor="">List of Phone Numbers</label>
-// <div>
-//   {fields.map((field, index)=>{
-//     return(
-//       <div className="formControl" key={field.id}>
-//         <input type="text" {...register(`phoneArray.${index}.number`)} />
-
-//         {
-//           index>0 && (
-//             <button type='button' onClick={()=> remove(index)}>
-//               Remove Phone Number</button>
-//           )
-//         }
-//       </div>
-//     )
-//   })}
-//   <button type='button' onClick={()=> append({ number :""})}>
-//     Add Phone Number</button>
-// </div>
-//         </div>
-//         <div className='formControl'>
-//           <label htmlFor='age'>age</label>
-//           <input type='number' id='age' {...register('age',{
-//             valueAsNumber : true,
-//             required : {
-//                 value : true,
-//                 message : "Age is required",
-//             }
-//           })}/>
-//           <p className='error'>{errors.age?.message}</p>
-//         </div>
-//         <br /><br />
-//         <div className='formControl'>
-//           <label htmlFor='dob'>Date of Birth</label>
-//           <input type='date' id='dob' {...register('dob',{
-//             valueAsDate : true,
-//             required : {
-//                 value : true,
-//                 message : "Date of Birth is required",
-//             }
-//           })}/>
-//           <p className='error'>{errors.dob?.message}</p>
-//         </div>
-//         <br /><br />
-//         <button>Submit</button>
-//         <button type='button' onClick={handleGetValues}>Get Value</button>
-//         <button type='button' onClick={()=>reset()}>Reset</button>
-//       </form>
-//       <DevTool control={control}/>
-//     </div>
-//   );
-// }
+export default AddEmployee;

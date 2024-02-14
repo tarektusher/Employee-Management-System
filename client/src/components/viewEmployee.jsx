@@ -44,7 +44,7 @@ const ViewEmployee = () => {
               </div>
             </div>
 
-            <div className="md:w-3/4 flex flex-col md:flex-row justify-between p-4">
+            <div className="md:w-3/4 flex flex-col md:flex-row justify-around gap-[2%]">
               <div className="flex flex-col justify-evenly md:w-1/2">
                 <div>
                   <p className="text-gray-400 text-xl">Full Name</p>
@@ -107,7 +107,7 @@ const ViewEmployee = () => {
             </div>
           </div>
           <div className="">
-            <p className="text-4xl  mx-auto w-[30%] bg-slate-300  flex items-center justify-center rounded-md px-[1%] py-[0.5%] mt-[.5%]">
+            <p className="text-4xl  mx-auto w-[35%] bg-slate-300  flex items-center justify-center rounded-md px-[1%] py-[0.5%] mt-[.5%]">
               Educational Background
             </p>
             <div className="w-[95%] mt-[.5%] bg-white flex flex-col md:flex-row justify-evenly align-middle text-left ml-[2%] rounded-md p-[1%]">
@@ -138,7 +138,7 @@ const ViewEmployee = () => {
             </div>
           </div>
           <div className="mb-[1%]">
-            <p className="text-4xl  mx-auto w-[30%] bg-slate-300  flex items-center justify-center rounded-md px-[1%] py-[0.5%] mt-[.5%]">
+            <p className="text-4xl  mx-auto w-[35%] bg-slate-300  flex items-center justify-center rounded-md px-[1%] py-[0.5%] mt-[.5%]">
               Employment Information
             </p>
             <div className="w-[95%] mt-[.5%] bg-white flex flex-col md:flex-row justify-evenly align-middle text-left ml-[2%] rounded-md p-[1%]">

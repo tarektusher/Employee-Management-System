@@ -109,7 +109,7 @@ const AddEmployee = () => {
           Employee Information
         </Typography>
         <Grid container spacing={4}>
-          <Grid item xs>
+          {/* <Grid item xs>
             <Item>
               <Card sx={{ maxWidth: 460 }}>
                 <CardActionArea sx={{ marginTop: "20px" }}>
@@ -144,15 +144,15 @@ const AddEmployee = () => {
                 </CardActionArea>
               </Card>
             </Item>
-          </Grid>
-          <Grid item xs={4}>
+          </Grid> */}
+          <Grid item xs={12}>
             <Item>
               <Typography gutterBottom variant="h5" align="center">
                 Basic Information
               </Typography>
               {/* <Grid> */}
               <Card
-                style={{ maxWidth: 450, padding: "20px 5px", margin: "0 auto" }}
+                style={{ width : '100%', padding: "20px 5px", margin: "0 auto" }}
               >
                 <CardContent>
                   <Typography
@@ -163,6 +163,7 @@ const AddEmployee = () => {
                   >
                     Fill up the form and read carefully before submit.
                   </Typography>
+                  <p className="text-4xl text-left pt-[1%] pb-[1%]">Personal Information</p>
                   <form onSubmit={handleSubmit(onSubmit)} noValidate>
                     <Grid container spacing={1}>
                       <Grid xs={12} sm={6} item>
@@ -207,7 +208,7 @@ const AddEmployee = () => {
                           required
                         />
                       </Grid>
-                      <Grid item xs={12}>
+                      <Grid item xs={12} sm={6}>
                         <TextField
                           label="email"
                           type="email"
@@ -218,7 +219,7 @@ const AddEmployee = () => {
                           required
                         />
                       </Grid>
-                      <Grid item xs={12}>
+                      <Grid item xs={12} sm={6}>
                         <TextField
                           label="phonenumber"
                           type="number"
@@ -240,6 +241,8 @@ const AddEmployee = () => {
                           required
                         />
                       </Grid>
+                      <p className="text-4xl text-left pt-[1%] pb-[1%]">Employment Information</p>
+
                       <Grid item xs={12}>
                         <TextField
                           label="Department"
@@ -282,6 +285,7 @@ const AddEmployee = () => {
                           required
                         />
                       </Grid>
+                  <p className="text-4xl text-left pt-[1%] pb-[1%]">Educational Information</p>
 
                       <Grid xs={12} sm={12} item>
                         <TextField
@@ -394,7 +398,7 @@ const AddEmployee = () => {
               {/* </Grid> */}
             </Item>
           </Grid>
-          <Grid item xs>
+          {/* <Grid item xs>
             <Item>
             <Card sx={{ maxWidth: 460 }}>
                 <CardActionArea sx={{ marginTop: "20px" }}>
@@ -429,7 +433,7 @@ const AddEmployee = () => {
                 </CardActionArea>
               </Card>
             </Item>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Box>
     </div>

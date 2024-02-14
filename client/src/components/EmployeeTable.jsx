@@ -3,10 +3,11 @@ import Box from "@mui/material/Box";
 import { Button, CircularProgress, Typography } from "@mui/material";
 import EmployeeButton from "./EmployeeButton";
 import useEmployee from "../hooks/useEmployee";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import AddIcon from '@mui/icons-material/Add';
 import { useTable } from "react-table";
 import "../App.css";
 
@@ -190,7 +191,7 @@ const columns = [
 const EmployeeTable = () => {
   const [userData, setUserData] = React.useState();
   const { data, isError, isLoading, error } = useEmployee.useGetAllEmployees();
-
+  const navigate = useNavigate();
   React.useEffect(() => {
     setUserData(data?.data);
   }, [data]);
@@ -217,14 +218,18 @@ const EmployeeTable = () => {
   }
 
   return (
-    <div>
-      <Box>
-        <Typography sx={{ marginTop: "10px" }} variant="h4">
-          Employee Information
-        </Typography>
-        <EmployeeButton />
-      </Box>
-      <div className="mt-[2.5%] w-full h-full ">
+    <div className="bg-slate-200 h-screen min-w-full overflow-y-hidden">
+      <div className="mt-[0.5%] overflow-y-hidden">
+        <p className="text-4xl  mx-auto w-[25%] bg-slate-300  flex items-center justify-center rounded-md px-[1%] py-[0.5%] pt-[.5%]">
+          Employee Table
+        </p>
+      </div>
+      <div className="mt-[1.5%]">
+
+      <Button variant="contained" startIcon={<AddIcon />} onClick={() => navigate('/addemployee')}>Add Employee</Button>
+      </div>
+      
+      <div className="mt-[2.5%]  bg-slate-200 min-h-full min-w-full overflow-y-hidden">
         <table
           {...getTableProps()}
           style={{ border: "1px solid black" }}

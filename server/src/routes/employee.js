@@ -115,7 +115,6 @@ employeeRoutes.get('/employee/:id', async(req, res) =>{
     try {
         emp_id = req.params.id;
         const employee_id = await Employee.findOne({emp_id});
-        console.log(employee_id);
         if(employee_id){
             res.status(200).json(employee_id);
         }

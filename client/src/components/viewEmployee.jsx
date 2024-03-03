@@ -8,7 +8,6 @@ const ViewEmployee = () => {
   const [user, setUser] = useState([]);
   const [loading, setLoading] = useState(true);
   const response = useEmployee.useGetEmployeeInfo({ id });
-  console.log(user);
   useEffect(() => {
     if (response && response.data) {
       setUser(response.data);

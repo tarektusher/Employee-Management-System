@@ -1,23 +1,20 @@
+import React from "react";
 import {
   Button,
   Card,
   CardContent,
+  Paper,
   TextField,
   Typography,
 } from "@mui/material";
-import "../../src/Dash.css";
 import { useForm, useFieldArray } from "react-hook-form";
-import { DevTool } from "@hookform/devtools";
-import * as React from "react";
-import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
 import DeleteIcon from "@mui/icons-material/Delete";
-import employeeeServices from "../services/employeeServices";
-import "../../src/Dash.css";
+import Grid from "@mui/material/Grid";
 import useEmployee from "../hooks/useEmployee";
+import employeeServices from "../services/employeeServices";
 import { useParams } from "react-router-dom";
+import styled from "@emotion/styled";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -27,84 +24,58 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const AddEmployee = () => {
+const EditEmployee = () => {
   const { id } = useParams();
-  const [user, setUser] = React.useState([]);
+  const [user, setUser] = React.useState({});
   const [loading, setLoading] = React.useState(true);
   const response = useEmployee.useGetEmployeeInfo({ id });
+
+  React.useEffect(() => {
+    if (response && response.data) {
+      setUser(response?.data);
+      setLoading(false);
+    }
+  }, [response]);
+
   const form = useForm({
     defaultValues: {
-      firstname: user?.firstname || "",
-      lastname: user?.lastname || "",
-      emp_id: user?.emp_id || "",
-      age: user?.age || "",
-      email: user?.email || "",
-      phonenumber: user?.phonenumber || "",
-      address: user?.address || "",
-      department: user?.department || "",
-      position: user?.position || "",
-      salary: user?.salary || "",
-      joiningdate: user?.joiningdate || "",
+      firstname: "",
+      lastname: "",
+      emp_id: "",
+      age: "",
+      email: "",
+      phonenumber: "",
+      address: "",
+      department: "",
+      position: "",
+      salary: "",
+      joiningdate: "",
       education: {
-        degree: user?.education?.degree || "",
-        subject: user?.education?.subject || "",
-        universityname: user?.education?.universityname || "",
-        graduationyear: user?.education?.graduationyear || "",
+        degree: "",
+        subject: "",
+        universityname: "",
+        graduationyear: "",
       },
-      skills: user?.skills || [],
+      skills: [],
     },
   });
-  
-  console.log(form)
-  const { register, control, handleSubmit, formState, getValues, reset } = form;
-  const { isSubmitSuccessful } = formState;
-  React.useEffect(() => {
-    reset({
-      data: "test",
-    });
-  }, [isSubmitSuccessful]);
-  const onSubmit = async (data) => {
-    
-    const {
-      firstname,
-      lastname,
-      emp_id,
-      age,
-      email,
-      phonenumber,
-      address,
-      department,
-      position,
-      salary,
-      joiningdate,
-      education,
-      skills,
-    } = data;
-    await employeeeServices.registerEmployee({
-      firstname,
-      lastname,
-      emp_id,
-      age,
-      email,
-      phonenumber,
-      address,
-      department,
-      position,
-      salary,
-      joiningdate,
-      education,
-      skills,
-    });
-    alert("::: Form was Submitted Successfully :::");
 
+  const { register, handleSubmit, formState, control, watch } = form;
+  const { isSubmitSuccessful } = formState;
+
+  React.useEffect(() => {
+    form.reset(user);
+  }, [user]);
+
+  const onSubmit = async (data) => {
+    await employeeServices.registerEmployee(data);
+    alert("Form was Submitted Successfully");
   };
+
   const { fields, append, remove } = useFieldArray({
     name: "skills",
     control,
   });
-  // const handleGetValues = () =>{
-  //   console.log("get Values", getValues());
-  // }
   return (
     <div className="bgColor">
       <Box sx={{ flexGrow: 1 }}>
@@ -133,19 +104,20 @@ const AddEmployee = () => {
                   <form onSubmit={handleSubmit(onSubmit)} noValidate>
                     <Grid container spacing={1}>
                       <Grid xs={12} sm={6} item>
-                        <TextField
-                          placeholder="Enter First name"
-                          defaultValue={form.defaultValues?.firstname}
-                          label="First Name"
-                          variant="outlined"
-                          {...register("firstname")}
-                          fullWidth
-                          required
-                        />
+                      <TextField
+                        placeholder="Enter First name"
+                        name="firstname"
+                        label="First Name"
+                        variant="outlined"
+                        {...register("firstname")}
+                        fullWidth
+                        required
+                      />
                       </Grid>
                       <Grid xs={12} sm={6} item>
                         <TextField
                           placeholder="Enter Last name"
+                          name = "lastname"
                           label="Last Name"
                           {...register("lastname")}
                           variant="outlined"
@@ -157,6 +129,7 @@ const AddEmployee = () => {
                         <TextField
                           type="Message"
                           placeholder="Enter Employee Id"
+                          name = "employeeid"
                           label="Employee Id"
                           {...register("emp_id")}
                           variant="outlined"
@@ -168,6 +141,7 @@ const AddEmployee = () => {
                         <TextField
                           type="number"
                           placeholder="Enter Employee Age"
+                          name ="age"
                           label="Age"
                           {...register("age", { valueAsNumber: true })}
                           variant="outlined"
@@ -358,7 +332,7 @@ const AddEmployee = () => {
                       </Grid>
                     </Grid>
                   </form>
-                  <DevTool control={control} />
+                  {/* <DevTool control={control} /> */}
                 </CardContent>
               </Card>
             </Item>
@@ -368,4 +342,4 @@ const AddEmployee = () => {
     </div>
   );
 };
-export default AddEmployee;
+export default EditEmployee;

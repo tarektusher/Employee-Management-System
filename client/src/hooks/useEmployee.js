@@ -15,6 +15,13 @@ const useGetEmployeeInfo = ({id}) =>{
         return response.data;
     });
 }
+const useGetEmployeeInfoForEdit = ({ id }) => {
+    return useQuery('useGetEmployeeInfoForEdit', async () => {
+        const response = await Axios.get(`/employee/${id}`);
+        console.log(response);
+        return response.data; 
+    });
+};
 const useGetEmployeeEdit = ({id})=>{
     return useQuery('useGetEmployeeEdit',()=>{
         Axios({
@@ -23,6 +30,6 @@ const useGetEmployeeEdit = ({id})=>{
         })
     })
 }
-const useEmployee = {useGetAllEmployees, useGetEmployeeEdit, useGetEmployeeInfo}
+const useEmployee = {useGetAllEmployees, useGetEmployeeEdit, useGetEmployeeInfo,useGetEmployeeInfoForEdit}
 export default useEmployee;
 

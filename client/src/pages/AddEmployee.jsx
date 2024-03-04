@@ -106,48 +106,11 @@ const AddEmployee = () => {
           Employee Information
         </Typography>
         <Grid container spacing={4}>
-          {/* <Grid item xs>
-            <Item>
-              <Card sx={{ maxWidth: 460 }}>
-                <CardActionArea sx={{ marginTop: "20px" }}>
-                  <CardMedia
-                    component="img"
-                    height="250"
-                    image={require("../assets/angryboss-removebg-preview.png")}
-                    alt="green iguana"
-                  />
-                  <CardContent>
-                    <Typography variant="h5" color="text.secondary">
-                      Don't blame the boss. He has enough problems.
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </Item>
-            <Item sx={{marginTop : '10px'}}>
-              <Card sx={{ maxWidth: 460 }}>
-                <CardActionArea sx={{ marginTop: "20px" }}>
-                  <CardMedia
-                    component="img"
-                    height="250"
-                    image={require("../assets/swftare.webp")}
-                    alt="green iguana"
-                  />
-                  <CardContent>
-                    <Typography variant="h5" color="text.secondary">
-                      Don't blame the boss. He has enough problems.
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </Item>
-          </Grid> */}
           <Grid item xs={12}>
             <Item>
               <Typography gutterBottom variant="h5" align="center">
                 Basic Information
               </Typography>
-              {/* <Grid> */}
               <Card
                 style={{ width : '100%', padding: "20px 5px", margin: "0 auto" }}
               >

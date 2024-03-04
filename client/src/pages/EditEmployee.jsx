@@ -31,171 +31,259 @@ const EditEmployee = () => {
   const { id } = useParams();
   const [user, setUser] = useState([]);
   const [loading, setLoading] = useState(true);
-  console.log(id)
-  const response =  useEmployee.useGetEmployeeInfoForEdit({ id });
+  console.log(id);
+  const response = useEmployee.useGetEmployeeInfoForEdit({ id });
   useEffect(() => {
     if (response && response.data) {
       setUser(response.data);
       setLoading(false);
     }
   }, [response]);
- console.log(user);
+  console.log(user);
+
+  const handleSubmit = () => {
+
+  };
+
+  const handleChange = () => {
+    
+  }
   return (
-    <div className="bg-slate-200 min-h-full overflow-y-hidden">
-    <div className="mt-[0.5%] overflow-y-hidden">
-      <p className="text-4xl  mx-auto w-[25%] bg-slate-300  flex items-center justify-center rounded-md px-[1%] py-[0.5%] pt-[.5%]">
-        Employee Details
-      </p>
+    <div className=" bg-white px-6 py-8 rounded-md  min-h-screen flex flex-col">
+      <input
+        type="file"
+        className="hidden"
+        id="profile_pic"
+        // onChange={handleInputChange}
+      />
+
+      <div>
+        {/* <p className="text-xl font-medium">Account Settings</p>
+          <p className="text-sm font-medium mt-3">Change Profile Picture</p>
+          <div className="mt-2 flex items-center gap-4">
+            <div className="rounded-full overflow-hidden">
+              <img
+                src={
+                  isProfileImage
+                    ? previewUrl ?? "dummyProfile.png"
+                    : "dummyProfile.png"
+                }
+                className="h-24 w-24 rounded-full object-cover"
+                alt="User Image"
+              />
+            </div>
+            <div className="">
+              <button
+                onClick={() => {
+                  document.getElementById("profile_pic")?.click();
+                }}
+              >
+                <Editicon />
+              </button>
+            </div>
+          </div> */}
+
+        <form onSubmit={handleSubmit}>
+          <p className="text-left text-4xl font-semibold">Personal Information</p>
+          <div className="flex flex-col text-left">
+          <div className="flex flex-row gap-2">
+              <div className="mt-4 font-medium w-[50%] ">
+                <label htmlFor="firstname" className="text-sm font-medium">
+                  First Name
+                </label>
+                <input
+                  className="border-2 border-slate-200 rounded-md px-4 py-2 mt-2 w-full"
+                  type="text"
+                  name="firstname"
+                  placeholder="Enter your first name"
+                  value={user.firstname}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="mt-4 font-medium w-[50%]">
+                <label htmlFor="lastname" className="text-sm font-medium">
+                  Last Name
+                </label>
+                <input
+                  className="border-2 border-slate-200 rounded-md px-4 py-2 mt-2 w-full"
+                  type="text"
+                  name="lastname"
+                  placeholder="Enter your last name"
+                  value={user.lastname}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            {/* {!isNameValid && (
+              <p className="text-red-500 text-sm ">Invalid Name Format.</p>
+            )} */}
+            <div className="flex flex-row gap-2">
+              <div className="mt-4 font-medium w-[50%] ">
+                <label htmlFor="emp_id" className="text-sm font-medium">
+                  Employee Id
+                </label>
+                <input
+                  className="border-2 border-slate-200 rounded-md px-4 py-2 mt-2 w-full"
+                  type="text"
+                  name="emp_id"
+                  placeholder="Enter your employee Id"
+                  value={user.emp_id}
+                  onChange={handleChange}
+                  disabled
+                />
+              </div>
+              <div className="mt-4 font-medium w-[50%]">
+                <label htmlFor="age" className="text-sm font-medium">
+                  Age
+                </label>
+                <input
+                  className="border-2 border-slate-200 rounded-md px-4 py-2 mt-2 w-full"
+                  type="text"
+                  name="age"
+                  placeholder="Enter your floor number"
+                  value={user.age}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            <div className="flex flex-row gap-2">
+              <div className="mt-4 font-medium w-[50%] ">
+                <label htmlFor="email" className="text-sm font-medium">
+                  Email
+                </label>
+                <input
+                  className="border-2 border-slate-200 rounded-md px-4 py-2 mt-2 w-full"
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  value={user.email}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="mt-4 font-medium w-[50%]">
+              <label htmlFor="phone" className="text-sm font-medium">
+                Contact Number <sup className=" text-red-600">*</sup>
+              </label>
+              <input
+                className="border-2 border-slate-200 rounded-md px-4 py-2 mt-2 w-full"
+                placeholder="01XXXXXXXXX"
+                type="number"
+                pattern="^01\d{9}$"
+                name="phone"
+                value={user.phonenumber}
+                onChange={handleChange}
+                // Stop default behavior for up and down arrow keys
+                onKeyDown={(e) => {
+                  if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+                    e.preventDefault();
+                  }
+                }}
+                onFocus={(e) => {
+                  e.currentTarget.addEventListener("wheel", (e) => {
+                    e.preventDefault();
+                  });
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.removeEventListener("wheel", (e) => {
+                    e.preventDefault();
+                  });
+                }}
+                /* {!isPhoneValid && (
+                <p className="text-red-500 text-sm mt-1">
+                  Invalid phone format. Length should be 11 digits.
+                </p>
+              )} */
+                required
+              />
+              </div>
+            </div>
+            <div className="mt-4 font-medium">
+              <label htmlFor="address" className="text-sm font-medium">
+                Address <sup className=" text-red-600">*</sup>
+              </label>
+              <input
+                className="border-2 border-slate-200 rounded-md px-4 py-2 mt-2 w-full"
+                placeholder="Enter your address"
+                type="text"
+                name="address"
+                value={user.address}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="mt-4 font-medium">
+              <label htmlFor="position" className="text-sm font-medium">
+                Position <sup className=" text-red-600">*</sup>
+              </label>
+              <input
+                className="border-2 border-slate-200 rounded-md px-4 py-2 mt-2 w-full"
+                type="text"
+                name="position"
+                placeholder="Select your user type"
+                value={user.position}
+                onChange={handleChange}
+                disabled
+                required
+              />
+            </div>
+            <div className="flex flex-row gap-2">
+              <div className="mt-4 font-medium w-[50%] ">
+                <label htmlFor="salary" className="text-sm font-medium">
+                  Salary
+                </label>
+                <input
+                  className="border-2 border-slate-200 rounded-md px-4 py-2 mt-2 w-full"
+                  type="text"
+                  name="salary"
+                  placeholder="Enter your branch name"
+                  value={user.salary}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="mt-4 font-medium w-[50%]">
+                <label htmlFor="age" className="text-sm font-medium">
+                  Age
+                </label>
+                <input
+                  className="border-2 border-slate-200 rounded-md px-4 py-2 mt-2 w-full"
+                  type="text"
+                  name="age"
+                  placeholder="Enter your floor number"
+                  value={user.age}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            <div className="flex justify-end items-end bottom-0 md:right-0 mt-8 mb-4  gap-4 font-medium">
+              <button
+                className=" px-8 py-2 mb-2 bg-cancleBtnColor rounded-md"
+                // onClick={(e) => handleCancel(e)}
+              >
+                Cancle
+                {/* {isFormEdited == true ? "Clear" : "Cancel"} */}
+              </button>
+              <button
+                type="submit"
+                // style={{
+                //   opacity:
+                //     !isFormEdited || formData?.designation === "Account Owner"
+                //       ? 0.6
+                //       : 1,
+                // }}
+                className={` px-8 py-2 mb-2  text-white rounded-md  bg-blue-500`}
+                // disabled={
+                //   formData?.designation === "Account Owner" || !isFormEdited
+                // }
+              >
+                {/* {loading ? "Saving..." : "Save"} */}
+                Save
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
-    {loading ? (
-      <div>
-        <p>Data is Coming</p>
-      </div>
-    ) : (
-      <div>
-        <div className="w-[95%] mt-[0.5%] bg-white flex flex-col justify-start text-left ml-[2%] rounded-md px-[1%] ">
-          <p className="text-4xl font-bold pt-[0.5%] ">
-            {" "}
-            {user.firstname} {user.lastname}{" "}
-          </p>
-          <p className="text-xl font-semibold pb-[.5%]">
-            {user.position} || {user.skills[0]}
-          </p>
-        </div>
-        <div className="w-[95%] mt-[.5%] bg-white flex flex-col md:flex-row align-middle text-left ml-[2%] rounded-md p-[1%]">
-          <div className="md:w-1/4 p-4">
-            <div>
-              <img src={image} className="h-48 w-48 p-2 border-2" />
-            </div>
-          </div>
-
-          <div className="md:w-3/4 flex flex-col md:flex-row justify-around gap-[2%]">
-            <div className="flex flex-col justify-evenly md:w-1/2">
-              <div>
-                <level className="text-gray-400 text-xl">Full Name</level>
-                <input className="text-black text-xl font-semibold">
-                  {user.firstname} 
-                </input>
-              </div>
-              <div>
-                <p className="text-gray-400 text-xl">Contact Number</p>
-                <p className="text-black text-xl font-semibold">
-                  {user.phonenumber}
-                </p>
-              </div>
-            </div>
-
-            <div className="flex flex-col justify-evenly md:w-1/2">
-              <div>
-                <p className="text-gray-400 text-xl">Email</p>
-                <p className="text-black text-xl font-semibold">
-                  {user.email}
-                </p>
-              </div>
-
-              <div>
-                <p className="text-gray-400 text-xl">Position</p>
-                <p className="text-black text-xl font-semibold">
-                  {user.position}
-                </p>
-              </div>
-            </div>
-
-            <div className="flex flex-col justify-evenly md:w-1/2">
-              <div>
-                <p className="text-gray-400 text-xl">Joining Data</p>
-                <p className="text-black text-xl font-semibold">
-                  {user.joiningdate}
-                </p>
-              </div>
-              <div>
-                <p className="text-gray-400 text-xl">Department</p>
-                <p className="text-black text-xl font-semibold">
-                  {user.department}
-                </p>
-              </div>
-            </div>
-
-            <div className="flex flex-col justify-evenly md:w-1/2">
-              
-              <div>
-                <p className="text-gray-400 text-xl">Country</p>
-                <p className="text-black text-xl font-semibold">Bangladesh</p>
-              </div>
-              <div>
-                <p className="text-gray-400 text-xl">Address</p>
-                <p className="text-black text-xl font-semibold">
-                  {user.address}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="">
-          <p className="text-4xl  mx-auto w-[35%] bg-slate-300  flex items-center justify-center rounded-md px-[1%] py-[0.5%] mt-[.5%]">
-            Educational Background
-          </p>
-          <div className="w-[95%] mt-[.5%] bg-white flex flex-col md:flex-row justify-evenly align-middle text-left ml-[2%] rounded-md p-[1%]">
-            <div>
-              <p className="text-gray-400 text-xl">Degree</p>
-              <p className="text-black text-xl font-semibold">
-                {user.education.degree}
-              </p>
-            </div>
-            <div>
-              <p className="text-gray-400 text-xl">Department Name</p>
-              <p className="text-black text-xl font-semibold">
-                {user.education.subject}
-              </p>
-            </div>
-            <div>
-              <p className="text-gray-400 text-xl">Gradution Year</p>
-              <p className="text-black text-xl font-semibold">
-                {user.education.gradutionyear}
-              </p>
-            </div>
-            <div>
-              <p className="text-gray-400 text-xl">University Name</p>
-              <p className="text-black text-xl font-semibold">
-                {user.education.universityname}
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="mb-[1%]">
-          <p className="text-4xl  mx-auto w-[35%] bg-slate-300  flex items-center justify-center rounded-md px-[1%] py-[0.5%] mt-[.5%]">
-            Employment Information
-          </p>
-          <div className="w-[95%] mt-[.5%] bg-white flex flex-col md:flex-row justify-evenly align-middle text-left ml-[2%] rounded-md p-[1%]">
-            <div>
-              <p className="text-gray-400 text-xl">Position</p>
-              <p className="text-black text-xl font-semibold">
-                {user.position}
-              </p>
-            </div>
-            <div>
-              <p className="text-gray-400 text-xl">Department</p>
-              <p className="text-black text-xl font-semibold">
-                {user.department}
-              </p>
-            </div>
-            <div>
-              <p className="text-gray-400 text-xl">Joining Data</p>
-              <p className="text-black text-xl font-semibold">
-                {user.joiningdate}
-              </p>
-            </div>
-            <div>
-              <p className="text-gray-400 text-xl">Salary</p>
-              <p className="text-black text-xl font-semibold">
-                {user.salary}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    )}
-  </div>
   );
 };
 export default EditEmployee;

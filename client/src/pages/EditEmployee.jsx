@@ -34,12 +34,12 @@ const EditEmployee = () => {
         <div> Data is coming</div>
       ) : (
         <div className=" bg-white px-6 py-8 rounded-md  min-h-screen flex flex-col">
-          <input
+          {/* <input
             type="file"
             className="hidden"
             id="profile_pic"
             // onChange={handleInputChange}
-          />
+          /> */}
 
           <div>
            {/* This code is for Image Upload */}

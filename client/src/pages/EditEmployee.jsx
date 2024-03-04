@@ -15,9 +15,19 @@ const EditEmployee = () => {
   }, [response]);
   console.log(user);
 
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
 
-  const handleChange = () => {};
+  };
+
+  const handleChange = (e) => {
+    const {name, value} = e.target;
+    // c 
+    setUser((prevData) => ({
+      ...prevData,
+      [name]:value,
+    }))
+    console.log(user)
+  };
   return (
     <>
       {loading ? (
@@ -32,6 +42,9 @@ const EditEmployee = () => {
           />
 
           <div>
+           {/* This code is for Image Upload */}
+
+
             {/* <p className="text-xl font-medium">Account Settings</p>
           <p className="text-sm font-medium mt-3">Change Profile Picture</p>
           <div className="mt-2 flex items-center gap-4">

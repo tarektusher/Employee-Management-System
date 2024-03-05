@@ -9,13 +9,7 @@ const EditEmployee = () => {
   const [loading, setLoading] = useState(true);
   const response = useEmployee.useGetEmployeeInfo({ id });
 
-  useEffect(() => {
-    if (response && response.data) {
-      setUser(response?.data);
-      setForm(user);
-      setLoading(false);
-    }
-  }, [response]);
+  
   let initialFormData = {
     firstname: "",
     lastname: "",
@@ -61,15 +55,22 @@ const EditEmployee = () => {
   // }
   
   const [form, setForm] = useState(initialFormData);
+  useEffect(() => {
+    if (response && response.data) {
+      setUser(response?.data);
+      setForm(user);
+      setLoading(false);
+    }
+  }, [response]);
   console.log(form)
   const handleChange = (e) => {
     const { name, value } = e.target;
     console.log(name);
     console.log(value);
-    // setForm((prevForm) => ({
-    //   ...prevForm,
-    //   [name]: value,
-    // }));
+    setForm((prevForm) => ({
+      ...prevForm,
+      [name]: value,
+    }));
   };
   const handleSubmit = async (e) => {};
 
@@ -96,9 +97,8 @@ const EditEmployee = () => {
                     type="text"
                     name="firstname"
                     placeholder="Enter your first name"
-                    value={form.firstname}
+                    defaultValue={form.firstname}
                     onChange={handleChange}
-                    onBlur={() => console.log("Final first name value:", form.firstname)}
                   />
                 </div>
                 <div className="mt-4 font-medium w-[50%]">
@@ -110,7 +110,7 @@ const EditEmployee = () => {
                     type="text"
                     name="lastname"
                     placeholder="Enter your last name"
-                    value={form.lastname}
+                    defaultValue={form.lastname}
                     onChange={handleChange}
                   />
                 </div>
@@ -125,7 +125,7 @@ const EditEmployee = () => {
                     type="text"
                     name="emp_id"
                     placeholder="Enter your employee Id"
-                    value={form.emp_id}
+                    defaultValue={form.emp_id}
                     onChange={handleChange}
                     disabled
                   />
@@ -139,7 +139,7 @@ const EditEmployee = () => {
                     type="text"
                     name="age"
                     placeholder="Enter your floor number"
-                    value={form.age}
+                    defaultValue={form.age}
                     onChange={handleChange}
                   />
                 </div>
@@ -154,7 +154,7 @@ const EditEmployee = () => {
                     type="email"
                     name="email"
                     placeholder="Enter your email"
-                    value={form.email}
+                    defaultValue={form.email}
                     onChange={handleChange}
                   />
                 </div>
@@ -168,7 +168,7 @@ const EditEmployee = () => {
                     type="number"
                     pattern="^01\d{9}$"
                     name="phone"
-                    value={form.phonenumber}
+                    defaultValue={form.phonenumber}
                     onChange={handleChange}
                     // Stop default behavior for up and down arrow keys
                     onKeyDown={(e) => {
@@ -199,141 +199,11 @@ const EditEmployee = () => {
                   placeholder="Enter your address"
                   type="text"
                   name="address"
-                  value={form.address}
+                  defaultValue={form.address}
                   onChange={handleChange}
                   required
                 />
               </div>
-              {/* <p className="text-left text-4xl font-semibold mt-[2%]">
-                Employment Information
-              </p>
-              <hr className="mt-[1%] border-2 border-slate-400"></hr>
-
-              <div className="mt-4 font-medium">
-                <label htmlFor="department" className="text-sm font-medium">
-                  Department <sup className=" text-red-600">*</sup>
-                </label>
-                <input
-                  className="border-2 border-slate-200 rounded-md px-4 py-2 mt-2 w-full"
-                  type="text"
-                  name="department"
-                  placeholder="Select your form type"
-                  value={form.department}
-                  onChange={handleChange}
-                  disabled
-                  required
-                />
-              </div>
-              <div className="flex flex-row gap-2">
-                <div className="mt-4 font-medium w-[50%] ">
-                  <label htmlFor="position" className="text-sm font-medium">
-                    Positon <sup className=" text-red-600">*</sup>
-                  </label>
-                  <input
-                    className="border-2 border-slate-200 rounded-md px-4 py-2 mt-2 w-full"
-                    type="text"
-                    name="position"
-                    placeholder="Enter your position"
-                    value={form.position}
-                    onChange={handleChange}
-                    disabled
-                  />
-                </div>
-                <div className="mt-4 font-medium w-[50%]">
-                  <label htmlFor="salary" className="text-sm font-medium">
-                    Salary <sup className=" text-red-600">*</sup>
-                  </label>
-                  <input
-                    className="border-2 border-slate-200 rounded-md px-4 py-2 mt-2 w-full"
-                    type="text"
-                    name="salary"
-                    placeholder="Enter your branch name"
-                    value={form.salary}
-                    onChange={handleChange}
-                    disabled
-                  />
-                </div>
-              </div>
-              <div className="mt-4 font-medium">
-                <label htmlFor="joiningdate" className="text-sm font-medium">
-                  Joining Date <sup className=" text-red-600">*</sup>
-                </label>
-                <input
-                  className="border-2 border-slate-200 rounded-md px-4 py-2 mt-2 w-full"
-                  placeholder="dd-mm-yy"
-                  type="text"
-                  name="joiningdate"
-                  value={form.joiningdate}
-                  onChange={handleChange}
-                  required
-                  disabled
-                />
-              </div> */}
-
-              {/* <p className="text-left text-4xl font-semibold mt-[2%]">
-                Educational Information
-              </p>
-              <hr className="mt-[1%] border-2 border-slate-400"></hr>
-
-              <div className="mt-4 font-medium">
-                <label htmlFor="degree" className="text-sm font-medium">
-                  Add Degree <sup className=" text-red-600">*</sup>
-                </label>
-                <input
-                  className="border-2 border-slate-200 rounded-md px-4 py-2 mt-2 w-full"
-                  placeholder="Add your degree"
-                  type="text"
-                  name="degree"
-                  value={form.education.degree}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="flex flex-row gap-2">
-                <div className="mt-4 font-medium w-[50%] ">
-                  <label htmlFor="subject" className="text-sm font-medium">
-                    Subject Name <sup className=" text-red-600">*</sup>
-                  </label>
-                  <input
-                    className="border-2 border-slate-200 rounded-md px-4 py-2 mt-2 w-full"
-                    type="text"
-                    name="subject"
-                    placeholder="Enter your subject name"
-                    value={form.education.subject}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="mt-4 font-medium w-[50%]">
-                  <label
-                    htmlFor="universityname"
-                    className="text-sm font-medium"
-                  >
-                    University Name <sup className=" text-red-600">*</sup>
-                  </label>
-                  <input
-                    className="border-2 border-slate-200 rounded-md px-4 py-2 mt-2 w-full"
-                    type="text"
-                    name="universityname"
-                    placeholder="Enter your floor number"
-                    value={form.education.universityname}
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-              <div className="mt-4 font-medium">
-                <label htmlFor="gradutionyear" className="text-sm font-medium">
-                  Graduation Year <sup className=" text-red-600">*</sup>
-                </label>
-                <input
-                  className="border-2 border-slate-200 rounded-md px-4 py-2 mt-2 w-full"
-                  placeholder="Add your gradution Year"
-                  type="text"
-                  name="gradutionyear"
-                  value={form.education.gradutionyear}
-                  onChange={handleChange}
-                  required
-                />
-              </div> */}
               <div className="flex justify-end items-end bottom-0 md:right-0 mt-8 mb-4  gap-4 font-medium">
                 <button
                   className=" px-8 py-2 mb-2 bg-cancleBtnColor rounded-md"
